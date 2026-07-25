@@ -37,7 +37,7 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink
-            to="/contact"
+            to="/ContactSales"
             className="text-slate-600 hover:text-slate-900 transition-colors"
           >
             Contact
@@ -47,10 +47,10 @@ const Navbar = () => {
         {/* Right Buttons */}
         <div className="flex items-center space-x-6 text-sm font-medium">
           <Link
-            to="/login"
+            to="/Register"
             className="text-slate-600 hover:text-slate-900 transition-colors"
           >
-            Log In
+            Register
           </Link>
 
           <Link
