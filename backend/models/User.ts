@@ -1,41 +1,107 @@
+// import mongoose, { Document, Schema } from "mongoose";
+
+// export type UserRole = "admin" | "member";
+
+// export interface IUser extends Document {
+//   id(id: string, userId: any, id1: any): unknown;
+//   name: string;
+//   email: string;
+//   password: string;
+//   role: UserRole;
+// }
+
+// const userSchema = new Schema<IUser>(
+//   {
+//     name: {
+//       type: String,
+//       required: true,
+//     },
+
+//     email: {
+//       type: String,
+//       required: true,
+//       unique: true,
+//     },
+
+//     password: {
+//       type: String,
+//       required: true,
+//     },
+
+//     role: {
+//       type: String,
+//       enum: ["admin", "member"],
+//       default: "member",
+//     },
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
+
+// export default mongoose.model<IUser>("User", userSchema);
+
+
 import mongoose, { Document, Schema } from "mongoose";
+
 
 export type UserRole = "admin" | "member";
 
+
 export interface IUser extends Document {
+
   name: string;
+
   email: string;
+
   password: string;
+
   role: UserRole;
+
 }
 
+
+
 const userSchema = new Schema<IUser>(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-
-    password: {
-      type: String,
-      required: true,
-    },
-
-    role: {
-      type: String,
-      enum: ["admin", "member"],
-      default: "member",
-    },
+{
+  name:{
+    type:String,
+    required:true,
   },
-  {
-    timestamps: true,
-  }
+
+
+  email:{
+    type:String,
+    required:true,
+    unique:true,
+  },
+
+
+  password:{
+    type:String,
+    required:true,
+  },
+
+
+  role:{
+    type:String,
+    enum:[
+      "admin",
+      "member"
+    ],
+    default:"member",
+  },
+
+
+},
+{
+  timestamps:true,
+}
 );
 
-export default mongoose.model<IUser>("User", userSchema);
+
+
+export default mongoose.model<IUser>(
+  "User",
+  userSchema
+);

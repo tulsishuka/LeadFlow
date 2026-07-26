@@ -7,20 +7,25 @@ import {
   updateLead,
   deleteLead,
   assignLead,
+  getMyLeads,
   updateLeadStatus,
+  updateLeadNotes,
 } from "../controllers/lead.controller";
-import { authorize, protect } from "../middlewares/auth.middleware";
 
+import {
+  protect,
+  authorize,
+} from "../middlewares/auth.middleware";
 
 const router = Router();
 
 /**
- * Public Route
+ * Public - Create Lead
  */
 router.post("/", createLead);
 
 /**
- * Admin & Member
+ * Admin & Member - Get All Leads
  */
 router.get(
   "/",
@@ -29,6 +34,21 @@ router.get(
   getAllLeads
 );
 
+/**
+ * Member - Get Assigned Leads
+ * IMPORTANT:
+ * Keep this BEFORE "/:id"
+ */
+router.get(
+  "/my-leads",
+  protect,
+  authorize("member"),
+  getMyLeads
+);
+
+/**
+ * Admin & Member - Get Single Lead
+ */
 router.get(
   "/:id",
   protect,
@@ -37,7 +57,7 @@ router.get(
 );
 
 /**
- * Admin Only
+ * Admin Only - Update Lead
  */
 router.put(
   "/:id",
@@ -46,6 +66,9 @@ router.put(
   updateLead
 );
 
+/**
+ * Admin Only - Delete Lead
+ */
 router.delete(
   "/:id",
   protect,
@@ -53,6 +76,9 @@ router.delete(
   deleteLead
 );
 
+/**
+ * Admin Only - Assign Lead
+ */
 router.put(
   "/:id/assign",
   protect,
@@ -61,7 +87,7 @@ router.put(
 );
 
 /**
- * Admin & Member
+ * Admin & Member - Update Lead Status
  */
 router.put(
   "/:id/status",
@@ -69,5 +95,16 @@ router.put(
   authorize("admin", "member"),
   updateLeadStatus
 );
+
+//////////////////
+router.put(
+  "/:id/notes",
+  protect,
+  authorize("admin", "member"),
+  updateLeadNotes
+);
+
+
+
 
 export default router;

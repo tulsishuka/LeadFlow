@@ -1,3 +1,5 @@
+
+
 import mongoose, { Document, Schema, Types } from "mongoose";
 
 export type LeadStatus =
@@ -8,16 +10,20 @@ export type LeadStatus =
   | "Won"
   | "Lost";
 
+
 export interface ILead extends Document {
   name: string;
   email: string;
   phone: string;
   company?: string;
   message: string;
+  notes?: string;
 
   status: LeadStatus;
 
   assignedTo?: Types.ObjectId;
+
+  assignedBy?: Types.ObjectId;
 
   createdBy?: Types.ObjectId;
 
@@ -25,63 +31,89 @@ export interface ILead extends Document {
   updatedAt: Date;
 }
 
+
 const leadSchema = new Schema<ILead>(
-  {
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-
-    email: {
-      type: String,
-      required: true,
-      lowercase: true,
-    },
-
-    phone: {
-      type: String,
-      required: true,
-    },
-
-    company: {
-      type: String,
-      default: "",
-    },
-
-    message: {
-      type: String,
-      required: true,
-    },
-
-    status: {
-      type: String,
-      enum: [
-        "New",
-        "Contacted",
-        "Qualified",
-        "Proposal Sent",
-        "Won",
-        "Lost",
-      ],
-      default: "New",
-    },
-
-    assignedTo: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      default: null,
-    },
-
-    createdBy: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      default: null,
-    },
+{
+  name:{
+    type:String,
+    required:true,
+    trim:true,
   },
-  {
-    timestamps: true,
-  }
+
+
+  email:{
+    type:String,
+    required:true,
+    lowercase:true,
+  },
+
+
+  phone:{
+    type:String,
+    required:true,
+  },
+
+
+  company:{
+    type:String,
+    default:"",
+  },
+
+
+  message:{
+    type:String,
+    required:true,
+  },
+ 
+notes: {
+  type: String,
+  default: "",
+},
+
+  status:{
+    type:String,
+    enum:[
+      "New",
+      "Contacted",
+      "Qualified",
+      "Proposal Sent",
+      "Won",
+      "Lost",
+    ],
+    default:"New",
+  },
+
+
+
+  assignedTo:{
+    type:Schema.Types.ObjectId,
+    ref:"User",
+    default:null,
+  },
+
+
+  assignedBy:{
+    type:Schema.Types.ObjectId,
+    ref:"User",
+    default:null,
+  },
+
+
+  createdBy:{
+    type:Schema.Types.ObjectId,
+    ref:"User",
+    default:null,
+  },
+
+
+},
+{
+ timestamps:true,
+}
 );
 
-export default mongoose.model<ILead>("Lead", leadSchema);
+
+export default mongoose.model<ILead>(
+ "Lead",
+ leadSchema
+);

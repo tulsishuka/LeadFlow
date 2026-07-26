@@ -1,4 +1,5 @@
 import Lead, { ILead } from "../models/Lead";
+import User from "../models/User";
 
 interface LeadQuery {
   page?: number;
@@ -94,26 +95,86 @@ export const updateLead = async (
   );
 };
 
+
+
+
+
+
+
 export const deleteLead = async (
   id: string
 ) => {
   return await Lead.findByIdAndDelete(id);
 };
 
+// export const assignLead = async (
+//   leadId: string,
+//   userId: string
+// ) => {
+//   return await Lead.findByIdAndUpdate(
+//     leadId,
+//     {
+//       assignedTo: userId,
+//     },
+//     {
+//       new: true,
+//     }
+//   );
+// };
+
+
+
 export const assignLead = async (
-  leadId: string,
-  userId: string
-) => {
-  return await Lead.findByIdAndUpdate(
+  leadId:string,
+  userId:string,
+  adminId:string
+)=>{
+
+
+  const member = await User.findOne({
+    _id:userId,
+    role:"member",
+  });
+
+
+  if(!member){
+
+    throw new Error(
+      "Lead can only be assigned to members"
+    );
+
+  }
+
+
+
+  const lead = await Lead.findByIdAndUpdate(
     leadId,
     {
-      assignedTo: userId,
+      assignedTo:member._id,
+      assignedBy:adminId,
+      status:"Contacted",
     },
     {
-      new: true,
+      new:true,
     }
+  )
+  .populate(
+    "assignedTo",
+    "name email role"
+  )
+  .populate(
+    "assignedBy",
+    "name email role"
   );
+
+
+  return lead;
+
 };
+
+
+
+
 
 export const updateLeadStatus = async (
   leadId: string,
@@ -121,11 +182,34 @@ export const updateLeadStatus = async (
 ) => {
   return await Lead.findByIdAndUpdate(
     leadId,
-    {
-      status,
-    },
-    {
-      new: true,
-    }
+    { status },
+    { new: true }
   );
+};
+
+
+export const getMyLeads = async (userId: string) => {
+  return await Lead.find({
+    assignedTo: userId,
+  }).populate("assignedTo", "name");
+};
+/////////////
+
+
+export const updateLeadNotes = async (
+  leadId: string,
+  notes: string
+) => {
+  console.log("Updating:", leadId);
+  console.log("Notes:", notes);
+
+  const lead = await Lead.findByIdAndUpdate(
+    leadId,
+    { notes },
+    { new: true }
+  );
+
+  console.log("Result:", lead);
+
+  return lead;
 };

@@ -1,6 +1,7 @@
 import { Request } from "express";
 import { IUser } from "../models/User";
 
-export interface AuthRequest extends Request {
+
+export interface AuthRequest extends Request<{ id: string }> {
   user?: IUser;
 }

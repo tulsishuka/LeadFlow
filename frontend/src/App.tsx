@@ -22,6 +22,7 @@ import Settings from "./pages/admin/Settings";
 import Activity from "./pages/admin/Activity";
 import MemberDashboard from "./pages/Member/Dashboard";
 import ContactSales from "./component/ContactSales";
+import LeadDetails from "./pages/Member/LeadDetails";
 
 // Member Pages
 
@@ -46,6 +47,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
+
       {/* Admin Dashboard */}
       <Route element={<DashboardLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
@@ -60,6 +62,7 @@ function App() {
         path="/member/dashboard"
         element={<MemberDashboard />}
       />
+      <Route path="/member/lead/:id" element={<LeadDetails />} />
     </Routes>
   );
 }

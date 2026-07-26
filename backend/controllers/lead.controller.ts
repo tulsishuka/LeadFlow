@@ -1,5 +1,6 @@
-import { Request, Response } from "express";
+import { AuthRequest } from "../interfaces/AuthRequest";
 import * as leadService from "../services/lead.service";
+import { Request, Response } from "express";
 
 // Create Lead (Public)
 export const createLead = async (
@@ -146,43 +147,100 @@ export const deleteLead = async (
   }
 };
 
-// Assign Lead
 export const assignLead = async (
-  req: Request<{ id: string }>,
+  req: AuthRequest,
   res: Response
 ): Promise<void> => {
+
+
   try {
+
     const { userId } = req.body;
 
-    const lead = await leadService.assignLead(
-      req.params.id,
-      userId
-    );
 
-    if (!lead) {
-      res.status(404).json({
-        success: false,
-        message: "Lead not found",
+    if (!req.user) {
+      res.status(401).json({
+        success:false,
+        message:"Unauthorized"
       });
       return;
     }
 
+
+    const lead = await leadService.assignLead(
+      req.params.id,
+      userId,
+      req.user._id.toString()
+    );
+
+
+    res.status(200).json({
+      success:true,
+      message:"Lead assigned successfully",
+      data:lead
+    });
+
+
+  } catch(error){
+
+    const err = error as Error;
+
+    res.status(400).json({
+      success:false,
+      message:err.message
+    });
+
+  }
+
+};
+
+
+/////////////////////
+
+
+
+
+
+
+
+
+export const getMyLeads = async (
+  req: AuthRequest,
+  res: Response
+): Promise<void> => {
+  try {
+    if (!req.user) {
+      res.status(401).json({
+        success: false,
+        message: "Unauthorized",
+      });
+      return;
+    }
+
+    const leads = await leadService.getMyLeads(
+      req.user._id.toString()
+    );
+
     res.status(200).json({
       success: true,
-      message: "Lead assigned successfully",
-      data: lead,
+      leads,
     });
   } catch (error) {
-    const err = error as Error;
+    console.log(error);
 
     res.status(500).json({
       success: false,
-      message: err.message,
+      message: (error as Error).message,
     });
   }
 };
 
-// Update Lead Status
+
+
+
+///////////////////
+
+
 export const updateLeadStatus = async (
   req: Request<{ id: string }>,
   res: Response
@@ -205,7 +263,7 @@ export const updateLeadStatus = async (
 
     res.status(200).json({
       success: true,
-      message: "Lead status updated successfully",
+      message: "Status updated successfully",
       data: lead,
     });
   } catch (error) {
@@ -214,6 +272,42 @@ export const updateLeadStatus = async (
     res.status(500).json({
       success: false,
       message: err.message,
+    });
+  }
+};
+///////////////////////////
+
+
+
+
+export const updateLeadNotes = async (
+  req: Request<{ id: string }>,
+  res: Response
+): Promise<void> => {
+  try {
+    console.log("Request Body:", req.body);
+    console.log("Lead ID:", req.params.id);
+
+    const { notes } = req.body;
+
+    const lead = await leadService.updateLeadNotes(
+      req.params.id,
+      notes
+    );
+
+    console.log("Updated Lead:", lead);
+
+    res.status(200).json({
+      success: true,
+      message: "Notes updated successfully",
+      data: lead,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: (error as Error).message,
     });
   }
 };
