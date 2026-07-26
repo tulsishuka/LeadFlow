@@ -1,5 +1,3 @@
-
-
 import mongoose, { Document, Schema, Types } from "mongoose";
 
 export type LeadStatus =

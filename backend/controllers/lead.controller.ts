@@ -1,8 +1,8 @@
 import { AuthRequest } from "../interfaces/AuthRequest";
 import * as leadService from "../services/lead.service";
 import { Request, Response } from "express";
+import * as activityService from "../services/activity.service";
 
-// Create Lead (Public)
 export const createLead = async (
   req: Request,
   res: Response
@@ -83,7 +83,6 @@ export const getLeadById = async (
   }
 };
 
-// Update Lead
 export const updateLead = async (
   req: Request<{ id: string }>,
   res: Response
@@ -147,25 +146,21 @@ export const deleteLead = async (
   }
 };
 
+
 export const assignLead = async (
   req: AuthRequest,
   res: Response
 ): Promise<void> => {
-
-
   try {
-
     const { userId } = req.body;
-
 
     if (!req.user) {
       res.status(401).json({
-        success:false,
-        message:"Unauthorized"
+        success: false,
+        message: "Unauthorized",
       });
       return;
     }
-
 
     const lead = await leadService.assignLead(
       req.params.id,
@@ -173,32 +168,36 @@ export const assignLead = async (
       req.user._id.toString()
     );
 
+    if (!lead) {
+      res.status(404).json({
+        success: false,
+        message: "Lead not found",
+      });
+      return;
+    }
+
+    await activityService.createActivity(
+  lead._id.toString(),
+  req.user._id.toString(),
+  "assigned",
+  "Lead assigned to member"
+);
 
     res.status(200).json({
-      success:true,
-      message:"Lead assigned successfully",
-      data:lead
+      success: true,
+      message: "Lead assigned successfully",
+      data: lead,
     });
 
-
-  } catch(error){
-
+  } catch (error) {
     const err = error as Error;
 
     res.status(400).json({
-      success:false,
-      message:err.message
+      success: false,
+      message: err.message,
     });
-
   }
-
 };
-
-
-/////////////////////
-
-
-
 
 
 
@@ -235,17 +234,19 @@ export const getMyLeads = async (
   }
 };
 
-
-
-
-///////////////////
-
-
 export const updateLeadStatus = async (
-  req: Request<{ id: string }>,
+  req: AuthRequest,
   res: Response
 ): Promise<void> => {
   try {
+    if (!req.user) {
+      res.status(401).json({
+        success: false,
+        message: "Unauthorized",
+      });
+      return;
+    }
+
     const { status } = req.body;
 
     const lead = await leadService.updateLeadStatus(
@@ -261,11 +262,19 @@ export const updateLeadStatus = async (
       return;
     }
 
+    await activityService.createActivity(
+      lead._id.toString(),
+      req.user._id.toString(),
+      "status",
+      `Changed status to ${status}`
+    );
+
     res.status(200).json({
       success: true,
       message: "Status updated successfully",
       data: lead,
     });
+
   } catch (error) {
     const err = error as Error;
 
@@ -275,18 +284,19 @@ export const updateLeadStatus = async (
     });
   }
 };
-///////////////////////////
-
-
-
 
 export const updateLeadNotes = async (
-  req: Request<{ id: string }>,
+  req: AuthRequest,
   res: Response
 ): Promise<void> => {
   try {
-    console.log("Request Body:", req.body);
-    console.log("Lead ID:", req.params.id);
+    if (!req.user) {
+      res.status(401).json({
+        success: false,
+        message: "Unauthorized",
+      });
+      return;
+    }
 
     const { notes } = req.body;
 
@@ -295,7 +305,20 @@ export const updateLeadNotes = async (
       notes
     );
 
-    console.log("Updated Lead:", lead);
+    if (!lead) {
+      res.status(404).json({
+        success: false,
+        message: "Lead not found",
+      });
+      return;
+    }
+
+    await activityService.createActivity(
+      lead._id.toString(),
+      req.user._id.toString(),
+      "note",
+      notes
+    );
 
     res.status(200).json({
       success: true,
@@ -303,11 +326,11 @@ export const updateLeadNotes = async (
       data: lead,
     });
   } catch (error) {
-    console.log(error);
+    const err = error as Error;
 
     res.status(500).json({
       success: false,
-      message: (error as Error).message,
+      message: err.message,
     });
   }
 };

@@ -3,5 +3,5 @@ import { IUser } from "../models/User";
 
 
 export interface AuthRequest extends Request<{ id: string }> {
-  user?: IUser;
+   user?: IUser;
 }

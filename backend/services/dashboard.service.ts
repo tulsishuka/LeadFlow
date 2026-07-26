@@ -63,13 +63,11 @@ export const getDashboardData = async () => {
       pipelineResult.find((item) => item._id === status)?.value || 0,
   }));
 
-  // Recent Leads
   const recentLeads = await Lead.find()
     .sort({ createdAt: -1 })
     .limit(5)
     .select("company name email status createdAt");
 
-  // Recent Activity
   const recentActivity = recentLeads.map((lead) => ({
     _id: lead._id,
     user: lead.name,
@@ -78,7 +76,6 @@ export const getDashboardData = async () => {
     time: new Date(lead.createdAt).toLocaleString(),
   }));
 
-  // Lead Trend
   const leadTrend = await Lead.aggregate([
     {
       $group: {

@@ -22,7 +22,7 @@ import Settings from "./pages/admin/Settings";
 import Activity from "./pages/admin/Activity";
 import MemberDashboard from "./pages/Member/Dashboard";
 import ContactSales from "./component/ContactSales";
-import LeadDetails from "./pages/Member/LeadDetails";
+import LeadDetails from "./pages/LeadDetails";
 
 // Member Pages
 
@@ -62,7 +62,10 @@ function App() {
         path="/member/dashboard"
         element={<MemberDashboard />}
       />
-      <Route path="/member/lead/:id" element={<LeadDetails />} />
+      <Route 
+ path="/leads/:id" 
+ element={<LeadDetails />} 
+/>
     </Routes>
   );
 }

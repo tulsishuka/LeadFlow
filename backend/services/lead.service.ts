@@ -95,32 +95,11 @@ export const updateLead = async (
   );
 };
 
-
-
-
-
-
-
 export const deleteLead = async (
   id: string
 ) => {
   return await Lead.findByIdAndDelete(id);
 };
-
-// export const assignLead = async (
-//   leadId: string,
-//   userId: string
-// ) => {
-//   return await Lead.findByIdAndUpdate(
-//     leadId,
-//     {
-//       assignedTo: userId,
-//     },
-//     {
-//       new: true,
-//     }
-//   );
-// };
 
 
 
@@ -144,10 +123,7 @@ export const assignLead = async (
     );
 
   }
-
-
-
-  const lead = await Lead.findByIdAndUpdate(
+ const lead = await Lead.findByIdAndUpdate(
     leadId,
     {
       assignedTo:member._id,
@@ -172,10 +148,6 @@ export const assignLead = async (
 
 };
 
-
-
-
-
 export const updateLeadStatus = async (
   leadId: string,
   status: string
@@ -193,8 +165,6 @@ export const getMyLeads = async (userId: string) => {
     assignedTo: userId,
   }).populate("assignedTo", "name");
 };
-/////////////
-
 
 export const updateLeadNotes = async (
   leadId: string,

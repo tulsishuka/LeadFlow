@@ -19,7 +19,6 @@ import {
 const router = Router();
 
 
-// Get all users
 router.get(
   "/",
   protect,
@@ -27,9 +26,6 @@ router.get(
   getUsers
 );
 
-
-// Get only members
-// For assigning leads
 router.get(
   "/members",
   protect,
@@ -38,7 +34,6 @@ router.get(
 );
 
 
-// Get single user
 router.get(
   "/:id",
   protect,
@@ -46,8 +41,6 @@ router.get(
   getUser
 );
 
-
-// Create user
 router.post(
   "/",
   protect,
@@ -56,7 +49,6 @@ router.post(
 );
 
 
-// Update user
 router.put(
   "/:id",
   protect,
@@ -65,7 +57,6 @@ router.put(
 );
 
 
-// Delete user
 router.delete(
   "/:id",
   protect,
@@ -74,7 +65,6 @@ router.delete(
 );
 
 
-// Reset password
 router.put(
   "/:id/reset-password",
   protect,

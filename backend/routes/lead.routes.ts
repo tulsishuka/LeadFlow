@@ -19,14 +19,9 @@ import {
 
 const router = Router();
 
-/**
- * Public - Create Lead
- */
+
 router.post("/", createLead);
 
-/**
- * Admin & Member - Get All Leads
- */
 router.get(
   "/",
   protect,
@@ -34,11 +29,6 @@ router.get(
   getAllLeads
 );
 
-/**
- * Member - Get Assigned Leads
- * IMPORTANT:
- * Keep this BEFORE "/:id"
- */
 router.get(
   "/my-leads",
   protect,
@@ -46,9 +36,7 @@ router.get(
   getMyLeads
 );
 
-/**
- * Admin & Member - Get Single Lead
- */
+
 router.get(
   "/:id",
   protect,
@@ -56,9 +44,7 @@ router.get(
   getLeadById
 );
 
-/**
- * Admin Only - Update Lead
- */
+
 router.put(
   "/:id",
   protect,
@@ -66,9 +52,6 @@ router.put(
   updateLead
 );
 
-/**
- * Admin Only - Delete Lead
- */
 router.delete(
   "/:id",
   protect,
@@ -76,9 +59,6 @@ router.delete(
   deleteLead
 );
 
-/**
- * Admin Only - Assign Lead
- */
 router.put(
   "/:id/assign",
   protect,
@@ -86,9 +66,6 @@ router.put(
   assignLead
 );
 
-/**
- * Admin & Member - Update Lead Status
- */
 router.put(
   "/:id/status",
   protect,
@@ -96,7 +73,6 @@ router.put(
   updateLeadStatus
 );
 
-//////////////////
 router.put(
   "/:id/notes",
   protect,
