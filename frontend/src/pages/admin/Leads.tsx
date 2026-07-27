@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Papa from "papaparse";
-
 import {
   MoreVertical,
   ChevronLeft,
@@ -142,22 +140,7 @@ const Leads = () => {
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const exportLeads = () => {
-    const csv = Papa.unparse(leads);
-
-    const blob = new Blob([csv], {
-      type: "text/csv",
-    });
-
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-
-    link.href = url;
-    link.download = "leads.csv";
-    link.click();
-  };
+ ;
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -204,20 +187,9 @@ const Leads = () => {
 
   return (
 
-<div className="min-h-screen bg-[#f8f9ff] p-6 font-sans">
+<div className="min-h-screen bg-[#F2EFFF] p-6 font-sans">
   <div className="max-w-7xl mx-auto space-y-6">
 
-    {/* Header */}
-    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Leads</h1>
-        <p className="text-xs text-slate-500 mt-1 font-medium">
-          <span className="font-bold text-slate-800">{pagination.total}</span> total leads in pipeline <span className="mx-1">•</span> <span className="text-emerald-600 font-semibold">12 active today</span>
-        </p>
-      </div>
-
-      
-    </div>
 
     {/* Search Bar */}
     <div className="mb-4">
@@ -250,12 +222,11 @@ const Leads = () => {
       </div>
     )}
 
-    {/* Table Container */}
     <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="bg-[#f8fafc] border-b border-slate-100 text-[11px] font-semibold text-slate-400 uppercase tracking-wider text-left">
+            <tr className="bg-[#0F0069] border-b border-slate-100 text-[11px] font-semibold text-slate-400 uppercase tracking-wider text-left">
               <th className="px-6 py-3.5">Customer</th>
               {columns.email && <th className="px-6 py-3.5">Email</th>}
               {columns.company && <th className="px-6 py-3.5">Company</th>}
@@ -279,12 +250,11 @@ const Leads = () => {
                   {/* Customer */}
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-slate-600 shrink-0">
+                      <div className="w-9 h-9 rounded-full bg-[#F2EFFF] border border-slate-200 flex items-center justify-center font-bold text-slate-600 shrink-0">
                         {lead.name.charAt(0).toUpperCase()}
                       </div>
                       <div>
-                        <h3 className="font-bold text-slate-900 leading-snug">{lead.name}</h3>
-                        {/* <p className="text-[11px] text-slate-400">{lead.phone || lead.title || "Contact"}</p> */}
+                        <h3 className="font-bold text-slate-500 leading-snug">{lead.name}</h3>
                       </div>
                     </div>
                   </td>
@@ -369,7 +339,7 @@ const Leads = () => {
       </div>
 
       {/* Pagination Footer */}
-      <div className="flex justify-between items-center bg-[#f8fafc] border-t border-slate-100 px-6 py-3.5 text-xs text-slate-500">
+      <div className="flex justify-between items-center bg-[#0F0069]  border-t border-slate-100 px-6 py-3.5 text-xs text-slate-500">
         <p className="font-medium">
           Showing <span className="font-bold text-slate-700">{pagination.page * 10 - 9}-{Math.min(pagination.page * 10, pagination.total)}</span> of <span className="font-bold text-slate-700">{pagination.total}</span> leads
         </p>
@@ -383,7 +353,7 @@ const Leads = () => {
             <ChevronLeft size={16} />
           </button>
 
-          <button className="w-7 h-7 bg-indigo-600 text-white rounded-lg font-semibold flex items-center justify-center text-xs">
+          <button className="w-7 h-7   text-white rounded-lg font-semibold flex items-center justify-center text-xs">
             {pagination.page}
           </button>
 
