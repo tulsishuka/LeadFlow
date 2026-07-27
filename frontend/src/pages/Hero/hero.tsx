@@ -1,72 +1,57 @@
+import { Link } from "react-router-dom";
+
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-white">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-50 via-white to-white" />
+    <section className="relative overflow-hidden bg-[#EDF1F5] pt-20 pb-24">
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute left-1/2 top-0 h-[450px] w-[900px] -translate-x-1/2 rounded-full bg-gradient-to-b from-indigo-200/40 via-purple-100/30 to-transparent blur-3xl" />
+      </div>
 
-      {/* Decorative Blur */}
-      <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-indigo-300/20 blur-3xl" />
-      <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-purple-300/10 blur-3xl" />
-
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 pt-20 pb-16 md:pt-28 md:pb-24">
-        {/* Badge */}
+      <div className="max-w-7xl mx-auto px-6">
+        
         <div className="flex justify-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-2 text-xs font-semibold tracking-wider text-indigo-700 uppercase">
-            <span className="h-2 w-2 rounded-full bg-indigo-500" />
+          <span className="inline-flex items-center gap-2 rounded-full bg-[#2b2388] px-5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-white shadow-lg">
+            <span className="h-2 w-2 rounded-full bg-orange-400"></span>
             Lead Management 2.0
           </span>
         </div>
 
-        {/* Heading */}
-        <h1 className="mx-auto mt-8 max-w-5xl text-center font-extrabold tracking-tight text-gray-900 leading-[1.1] text-[clamp(2.5rem,6vw,5rem)]">
-          Manage Every Lead.
-          <br className="hidden sm:block" />
-          <span className="text-indigo-600">
-            {" "}
-            Close More Deals.
-          </span>
-        </h1>
+        <h1 className="mx-auto mt-8 max-w-7xl text-center text-4xl md:text-6xl font-extrabold leading-tight text-slate-900 lg:whitespace-nowrap">
+  Manage Every Lead.{" "}
+  <span className="text-[#0F0069]">Close More Deals.</span>
+</h1>
 
-        {/* Description */}
-        <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-8 text-gray-600 sm:text-lg">
-          Accelerate your sales cycle with an enterprise-grade platform that
-          unifies your pipeline, automates outreach, and predicts your next
-          big win.
+        <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-7 text-slate-500">
+          Accelerate your sales cycle with the enterprise-grade platform that
+          unifies your pipeline, automates outreach, and predicts your next big
+          win.
         </p>
 
-        {/* Buttons */}
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href="#"
-            className="inline-flex w-full items-center justify-center rounded-xl bg-indigo-600 px-8 py-4 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-indigo-700 hover:shadow-xl sm:w-auto"
-          >
+          <Link to="Register">
+          <button className="rounded-xl bg-[#0F0069] px-8 py-3.5 text-sm font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-[#211b70]">
             Get Started for Free
-          </a>
-
-          <a
-            href="#"
-            className="inline-flex w-full items-center justify-center rounded-xl border border-gray-300 bg-white px-8 py-4 text-sm font-semibold text-gray-900 transition-all duration-300 hover:-translate-y-1 hover:border-gray-400 hover:shadow-lg sm:w-auto"
-          >
+          </button>
+</Link>
+<Link to="ContactSales">
+          <button className="rounded-xl border border-gray-200 bg-white px-8 py-3.5 text-sm font-semibold text-[#0F0069] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
             Request a Demo
-          </a>
+          </button>
+          </Link>
         </div>
+        
 
-        {/* Dashboard */}
-        <div className="relative mt-16 md:mt-24">
-          {/* Glow */}
-          <div className="absolute inset-0 rounded-[32px] bg-indigo-400/20 blur-3xl" />
+       <div className="relative mt-20 flex justify-center">
+  <div className="absolute top-12 h-24 w-[60%] rounded-full bg-indigo-300/20 blur-3xl"></div>
 
-          <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-2 shadow-[0_30px_80px_rgba(0,0,0,0.12)]">
-  <div className="aspect-[16/8] overflow-hidden rounded-2xl">
-    <img
-      src="/d.png"
-      alt="LeadFlow Dashboard"
-      loading="lazy"
-      className="h-full w-full object-cover object-top"
-    />
+  <div className="relative w-[92%] sm:w-[85%] lg:w-[78%] overflow-hidden rounded-3xl border border-gray-200 bg-white p-3 shadow-[0_30px_80px_rgba(79,70,229,0.15)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_40px_100px_rgba(79,70,229,0.22)]">
+   <img
+  src="/dash.webp"
+  alt="LeadFlow Dashboard"
+  className="w-full h-[220px] sm:h-[320px] lg:h-[420px] rounded-2xl object-cover"
+/>
   </div>
 </div>
-        </div>
       </div>
     </section>
   );
