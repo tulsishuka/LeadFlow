@@ -31,16 +31,15 @@ const testimonials = [
 
 const Testimonial = () => {
   return (
-    <section className="w-full bg-[#f8f9ff]">
-      {/* Top Banner Stats */}
-      <div className="bg-[#4338ca] py-12 px-4">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
+    <section className="w-full bg-[#EDF1F5]">
+      <div className="bg-[#0F0069] py-10 sm:py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center text-white">
           {stats.map((stat, index) => (
             <div key={index} className="flex flex-col items-center">
-              <span className="text-4xl md:text-5xl font-extrabold tracking-tight">
+              <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
                 {stat.value}
               </span>
-              <span className="mt-2 text-xs md:text-sm font-semibold tracking-wider text-indigo-200 uppercase">
+              <span className="mt-1.5 sm:mt-2 text-xs md:text-sm font-semibold tracking-wider text-indigo-200 uppercase">
                 {stat.label}
               </span>
             </div>
@@ -48,11 +47,9 @@ const Testimonial = () => {
         </div>
       </div>
 
-      {/* Main Testimonial Section */}
-      <div className="max-w-6xl mx-auto px-4 py-16 md:py-24">
-        {/* Section Heading */}
-        <div className="text-center max-w-xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24">
+        <div className="text-center max-w-xl mx-auto mb-10 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
             Trusted by Digital Heroes
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base font-medium leading-relaxed">
@@ -60,14 +57,13 @@ const Testimonial = () => {
           </p>
         </div>
 
-        {/* Testimonial Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-sm flex flex-col justify-between border border-slate-100"
+              className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between border border-slate-100 transition-all hover:shadow-md"
             >
-              <p className="text-slate-600 italic text-sm md:text-base leading-relaxed mb-8">
+              <p className="text-slate-500 italic text-sm md:text-base leading-relaxed mb-6 sm:mb-8">
                 {item.quote}
               </p>
 
@@ -75,10 +71,10 @@ const Testimonial = () => {
                 <img
                   src={item.avatar}
                   alt={item.author}
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="w-10 h-10 rounded-full object-cover shrink-0"
                 />
                 <div>
-                  <h4 className="text-sm font-bold text-slate-900 leading-tight">
+                  <h4 className="text-sm font-bold text-[#0F0069] leading-tight">
                     {item.author}
                   </h4>
                   <p className="text-xs text-slate-500 font-medium mt-0.5">
