@@ -23,7 +23,8 @@ const LeadCard = () => {
 
     
 const { data } = await axios.get(
-  "http://localhost:3000/api/dashboard/stats",
+  // "http://localhost:3000/api/dashboard/stats",
+   "https://leadflow-s0bj.onrender.com/api/dashboard/stats",
   {
     headers: {
       Authorization: `Bearer ${token}`,

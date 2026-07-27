@@ -33,7 +33,7 @@ const Activity = () => {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        "http://localhost:3000/api/activities",
+        "https://leadflow-s0bj.onrender.com/api/activities",
         {
           headers: {
             Authorization: `Bearer ${token}`,

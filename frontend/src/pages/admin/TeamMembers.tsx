@@ -28,7 +28,7 @@ const TeamMembers = () => {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        "http://localhost:3000/api/users",
+        "https://leadflow-s0bj.onrender.com/api/users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ const TeamMembers = () => {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `http://localhost:3000/api/users/${id}`,
+        `https://leadflow-s0bj.onrender.com/api/users/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -93,7 +93,7 @@ const TeamMembers = () => {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:3000/api/users/${user._id}`,
+        `https://leadflow-s0bj.onrender.com/api/users/${user._id}`,
         {
           name,
           role,

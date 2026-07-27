@@ -66,7 +66,7 @@ const LeadTimeline = () => {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        "http://localhost:3000/api/dashboard",
+        "https://leadflow-s0bj.onrender.com/api/dashboard",
         {
           headers: {
             Authorization: `Bearer ${token}`,

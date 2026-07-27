@@ -54,7 +54,7 @@ const LeadDetails = () => {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        `http://localhost:3000/api/leads/${id}`,
+        `https://leadflow-s0bj.onrender.com/api/leads/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -81,7 +81,7 @@ const LeadDetails = () => {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:3000/api/leads/${id}/status`,
+        `https://leadflow-s0bj.onrender.com/api/leads/${id}/status`,
         {
           status,
         },
@@ -109,7 +109,7 @@ const LeadDetails = () => {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:3000/api/leads/${id}/notes`,
+        `https://leadflow-s0bj.onrender.com/api/leads/${id}/notes`,
         {
           notes,
         },

@@ -42,7 +42,7 @@ const ContactSales = () => {
       setStatus("");
 
       const response = await axios.post(
-        "http://localhost:3000/api/leads",
+        "https://leadflow-s0bj.onrender.com/api/leads",
         formData
       );
 

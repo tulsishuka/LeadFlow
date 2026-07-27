@@ -27,7 +27,7 @@ const MemberLead = () => {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        "http://localhost:3000/api/leads/my-leads",
+        "https://leadflow-s0bj.onrender.com/api/leads/my-leads",
         {
           headers: {
             Authorization: `Bearer ${token}`,

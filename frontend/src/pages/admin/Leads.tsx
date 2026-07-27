@@ -64,7 +64,7 @@ const Leads = () => {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        `http://localhost:3000/api/leads?page=${page}&limit=10`,
+        `https://leadflow-s0bj.onrender.com/api/leads?page=${page}&limit=10`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -91,7 +91,7 @@ const Leads = () => {
     const token = localStorage.getItem("token");
 
     const response = await axios.get(
-      "http://localhost:3000/api/users/members",
+      "https://leadflow-s0bj.onrender.com/api/users/members",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -124,7 +124,7 @@ const Leads = () => {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:3000/api/leads/${leadId}/assign`,
+        `https://leadflow-s0bj.onrender.com/api/leads/${leadId}/assign`,
         { userId },
         {
           headers: {
