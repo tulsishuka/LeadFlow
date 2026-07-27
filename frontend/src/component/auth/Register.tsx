@@ -48,7 +48,7 @@ const Register = () => {
       });
 
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/member/dashboard");
       }, 1500);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
