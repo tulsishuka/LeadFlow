@@ -61,39 +61,101 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9ff] flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white shadow-xl rounded-3xl p-8">
+ 
+  <div className="min-h-screen w-full flex flex-col lg:flex-row bg-slate-50 font-sans">
+    <div className="lg:w-[55%] bg-[#0F0069] text-white p-8 lg:p-16 flex flex-col justify-between relative overflow-hidden">
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-slate-900">
+      <div className="my-12 lg:my-auto max-w-2xl relative z-10">
+        <h1 className="text-3xl lg:text-4xl font-bold leading-tight mb-8">
+          Build stronger customer relationships with{" "}
+          <span className="text-orange-400">LeadFlow Pro.</span>
+        </h1>
+
+        <div className="border border-white/15 backdrop-blur-lg rounded-2xl p-6 shadow-2xl">
+          <div className="grid grid-cols-2 gap-6 mb-6">
+            <div>
+              <p className="text-xs uppercase tracking-wider text-indigo-200 font-semibold mb-1">
+                New Businesses
+              </p>
+
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl font-bold">8,540</span>
+
+                <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300">
+                  +18%
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs uppercase tracking-wider text-indigo-200 font-semibold mb-1">
+                Success Rate
+              </p>
+
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl font-bold">96%</span>
+
+                <span className="text-xs text-indigo-200">
+                  Growth
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-end justify-between gap-2 h-24 pt-4 border-t border-white/10">
+            <div className="w-full h-[35%] rounded-t bg-indigo-400/30" />
+            <div className="w-full h-[60%] rounded-t bg-indigo-400/40" />
+            <div className="w-full h-[50%] rounded-t bg-indigo-400/30" />
+            <div className="w-full h-[90%] rounded-t bg-indigo-300" />
+            <div className="w-full h-[70%] rounded-t bg-indigo-400/40" />
+            <div className="w-full h-[80%] rounded-t bg-indigo-400/50" />
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-4 border-t border-white/10 pt-6 text-xs text-indigo-200 relative z-10">
+        <div className="flex -space-x-2">
+          <div className="w-8 h-8 rounded-full bg-indigo-400 border-2 border-[#312E81]" />
+          <div className="w-8 h-8 rounded-full bg-indigo-300 border-2 border-[#312E81]" />
+          <div className="w-8 h-8 rounded-full bg-indigo-200 border-2 border-[#312E81] flex items-center justify-center text-[10px] font-bold text-indigo-900">
+            +5k
+          </div>
+        </div>
+
+        <span>Trusted by 5,000+ growing businesses worldwide</span>
+      </div>
+    </div>
+
+    {/* Right Section */}
+    <div className="lg:w-[45%] bg-white p-8 lg:p-16 flex flex-col justify-center">
+      <div className="max-w-md w-full mx-auto">
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900">
             Create Account
-          </h1>
+          </h2>
 
-          <p className="text-slate-500 mt-2">
-            Register to access LeadFlow Pro.
+          <p className="mt-2 text-sm text-slate-500">
+            Register to access your LeadFlow Pro workspace.
           </p>
         </div>
 
-        <form
-          onSubmit={handleRegister}
-          className="space-y-5"
-        >
-          {error && (
-            <div className="bg-red-100 text-red-600 p-3 rounded-lg text-sm">
-              {error}
-            </div>
-          )}
+        {error && (
+          <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-600">
+            {error}
+          </div>
+        )}
 
-          {success && (
-            <div className="bg-green-100 text-green-700 p-3 rounded-lg text-sm">
-              {success}
-            </div>
-          )}
+        {success && (
+          <div className="mb-6 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-700">
+            {success}
+          </div>
+        )}
 
+        <form onSubmit={handleRegister} className="space-y-5">
           {/* Name */}
-
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block mb-2 text-xs font-semibold uppercase tracking-wider text-slate-600">
               Full Name
             </label>
 
@@ -104,14 +166,11 @@ const Register = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-800 placeholder-slate-400 transition-all focus:border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600"
             />
           </div>
-
-          {/* Email */}
-
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block mb-2 text-xs font-semibold uppercase tracking-wider text-slate-600">
               Email Address
             </label>
 
@@ -122,50 +181,47 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-800 placeholder-slate-400 transition-all focus:border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600"
             />
           </div>
-
-          {/* Password */}
-
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block mb-2 text-xs font-semibold uppercase tracking-wider text-slate-600">
               Password
             </label>
 
             <input
               type="password"
               name="password"
-              placeholder="********"
+              placeholder="••••••••"
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-800 placeholder-slate-400 transition-all focus:border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition disabled:opacity-60"
+            className="w-full rounded-xl bg-[#1E1B4B] px-4 py-3.5 text-sm font-medium text-white shadow-md transition-all hover:bg-indigo-950 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? "Creating Account..." : "Create Account"}
           </button>
         </form>
 
-        <div className="text-center mt-6">
-          <p className="text-sm text-slate-600">
-            Already have an account?{" "}
-            <Link
-              to="/login"
-              className="text-indigo-600 font-semibold hover:underline"
-            >
-              Sign In
-            </Link>
-          </p>
+        <div className="mt-8 text-center text-sm text-slate-600">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="font-semibold text-indigo-600 hover:underline"
+          >
+            Sign In
+          </Link>
         </div>
       </div>
     </div>
+  </div>
+
   );
 };
 
