@@ -35,11 +35,11 @@ const Leads = () => {
   const [loading, setLoading] = useState(true);
 
   const [search, setSearch] = useState("");
-  const [showFilter, setShowFilter] = useState(false);
+  const [showFilter] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("");
   const [selectedLead, setSelectedLead] = useState<string | null>(null);
 
-  const [columns, setColumns] = useState({
+  const [columns] = useState({
     email: true,
     company: true,
     assigned: true,
