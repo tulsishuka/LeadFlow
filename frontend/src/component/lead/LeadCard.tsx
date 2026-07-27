@@ -153,18 +153,19 @@ setStats(data.data);
   }
 
   return (
-    <div className="w-full bg-[#f8f9ff] p-6 sm:p-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-        <div>
-          <h1 className="text-2xl font-extrabold text-slate-900">
-            Dashboard Overview
-          </h1>
+    <div className="w-full bg-[#F2EFFF] p-6 sm:p-8">
 
-          <p className="text-sm text-slate-500">
-            Real-time health of your lead pipeline.
-          </p>
-        </div>
-      </div>
+      <div className="mb-8 flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:items-center sm:text-left">
+  <div>
+    <h1 className="text-2xl font-extrabold text-slate-900">
+      Dashboard Overview
+    </h1>
+
+    <p className="text-sm text-slate-500">
+      Real-time health of your lead pipeline.
+    </p>
+  </div>
+</div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {cards.map((card, index) => (
@@ -203,6 +204,7 @@ setStats(data.data);
         ))}
       </div>
     </div>
+   
   );
 };
 
