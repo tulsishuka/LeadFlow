@@ -40,6 +40,7 @@ const LeadDetails = () => {
   const [notes, setNotes] = useState("");
 
   const [loading, setLoading] = useState(true);
+  
 
   const [savingStatus, setSavingStatus] = useState(false);
 
