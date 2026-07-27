@@ -1,40 +1,53 @@
-
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#f8f9ff] border-t border-slate-200 py-8 px-6">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        
-        {/* Left Section: Branding & Copyright */}
-        <div className="flex flex-col items-center md:items-start space-y-1">
-          <span className="text-base font-bold text-slate-900 tracking-tight">
+    <footer className="w-full border-t border-indigo-900 bg-[#0F0069] px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 md:flex-row md:items-center">
+        <div className="flex flex-col items-center text-center md:items-start md:text-left">
+          <span className="text-lg font-bold tracking-tight text-white">
             LeadFlow Pro
           </span>
-          <p className="text-xs text-slate-500 font-normal">
+
+          <p className="mt-1 text-sm text-slate-300">
             © 2024 LeadFlow Pro. All rights reserved.
           </p>
         </div>
 
-        {/* Center Section: Footer Links */}
-        <div className="flex flex-wrap justify-center items-center gap-6 text-xs text-slate-600 font-medium">
-          <a href="#privacy" className="hover:text-slate-900 transition-colors">
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm font-medium">
+          <a
+            href="#privacy"
+            className="text-slate-300 transition-colors hover:text-white"
+          >
             Privacy Policy
           </a>
-          <a href="#terms" className="hover:text-slate-900 transition-colors">
+
+          <a
+            href="#terms"
+            className="text-slate-300 transition-colors hover:text-white"
+          >
             Terms of Service
           </a>
-          <a href="#cookie" className="hover:text-slate-900 transition-colors">
+
+          <a
+            href="#cookie"
+            className="text-slate-300 transition-colors hover:text-white"
+          >
             Cookie Policy
           </a>
-          <a href="#contact" className="hover:text-slate-900 transition-colors">
+
+          <a
+            href="#contact"
+            className="text-slate-300 transition-colors hover:text-white"
+          >
             Contact Us
           </a>
         </div>
 
-        {/* Right Section: Tagline */}
-        <div className="text-xs text-slate-500 font-medium text-center md:text-right">
-          Built for <span className="text-[#4338ca] font-semibold">Digital Heroes Training Task</span>
+        <div className="text-center text-sm text-slate-300 md:text-right">
+          Built for{" "}
+          <span className="font-semibold text-indigo-300">
+            Digital Heroes Training Task
+          </span>
         </div>
-
       </div>
     </footer>
   );
