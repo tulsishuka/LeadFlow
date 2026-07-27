@@ -16,13 +16,15 @@ import DashboardLayout from "./component/Layout/DashboardLayout";
 
 // Admin Pages
 import Dashboard from "./pages/admin/Dashboard";
-import Leads from "./pages/admin/Leads";
 import TeamMembers from "./pages/admin/TeamMembers";
 import Settings from "./pages/admin/Settings";
 import Activity from "./pages/admin/Activity";
-import MemberDashboard from "./pages/Member/Dashboard";
 import ContactSales from "./component/ContactSales";
-import LeadDetails from "./pages/LeadDetails";
+import DashboardLayoutMember from "./pages/Member/DashboardLayoutMember";
+import MemberDashboard from "./pages/Member/MemberDashboard";
+import MemberLead from "./pages/Member/MemberLead";
+import LeadDetails from "./pages/Member/LeadDetails";
+import Leads from "./pages/admin/Leads";
 
 // Member Pages
 
@@ -48,24 +50,42 @@ function App() {
       <Route path="/register" element={<Register />} />
 
 
+
       {/* Admin Dashboard */}
       <Route element={<DashboardLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/leads" element={<Leads />} />
         <Route path="/team" element={<TeamMembers />} />
+        <Route path="/leads" element={<Leads />} />
+
         <Route path="/activity" element={<Activity />} />
         <Route path="/settings" element={<Settings />} />
       </Route>
 
-      {/* Member Dashboard */}
-      <Route
-        path="/member/dashboard"
-        element={<MemberDashboard />}
-      />
-      <Route 
- path="/leads/:id" 
- element={<LeadDetails />} 
-/>
+
+
+
+  
+    <Route element={<DashboardLayoutMember />}>
+  <Route
+    path="/member/dashboard"
+    element={<MemberDashboard />}
+  />
+
+  <Route
+    path="/member/leads"
+    element={<MemberLead />}
+  />
+
+  <Route
+    path="/member/leads/:id"
+    element={<LeadDetails />}
+  />
+
+  <Route
+    path="/member/settings"
+    element={<Settings />}
+  />
+</Route>
     </Routes>
   );
 }

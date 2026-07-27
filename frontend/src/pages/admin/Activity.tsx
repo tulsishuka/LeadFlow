@@ -82,129 +82,104 @@ console.log(error);
 
 return (
 
-<div className="p-6">
-
-
-<h1 className="text-3xl font-bold mb-6">
-Member Activity
-</h1>
 
 
 
-<div className="space-y-5">
+<div className="min-h-screen bg-[#F8FAFC] p-8 text-slate-800">
+  <div className="max-w-5xl mx-auto">
 
+    {/* Header */}
+    <div className="flex justify-between items-start mb-8">
+      <div>
+        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+          Global Activity Timeline
+        </h1>
+        <p className="text-slate-500 text-sm mt-1">
+          Real-time tracking of all lead interactions across your workspace.
+        </p>
+      </div>
 
-{
-activities
-.filter(
-(activity)=>activity.type==="note"
-)
-.map((activity)=>(
+      
+    </div>
 
+    {/* Timeline Wrapper */}
+    <div className="relative pl-24">
+      {/* Date Pill Marker */}
+      <div className="absolute left-0 top-0">
+        <span className="px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-bold shadow-xs">
+          Today
+        </span>
+      </div>
 
-<div
-key={activity._id}
-className="
-bg-white
-shadow
-rounded-xl
-p-5
-"
->
+      {/* Vertical Timeline Bar */}
+      <div className="absolute left-[88px] top-8 bottom-0 w-[2px] bg-indigo-100" />
 
+      {/* Activity List */}
+      <div className="space-y-6 pt-8">
+        {activities
+          .filter((activity) => activity.type === "note")
+          .map((activity) => (
+            <div key={activity._id} className="relative flex items-start gap-6">
 
-<div className="flex justify-between">
+              {/* Timestamp on Left side of line */}
+              <div className="absolute -left-24 top-5 w-16 text-right text-[11px] font-semibold text-slate-400">
+                {new Date(activity.createdAt).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </div>
 
+              {/* Node Dot on the timeline */}
+              <div className="absolute -left-[11px] top-6 w-3 h-3 rounded-full bg-amber-500 border-2 border-white shadow-xs z-10" />
 
-<div>
+              {/* Card Container */}
+              <div className="flex-1 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-xs hover:shadow-md transition-all duration-200">
+                
+                {/* User Info Header */}
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-sm font-bold text-slate-700">
+                    {activity.user?.name?.charAt(0).toUpperCase()}
+                  </div>
 
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-bold text-slate-900 text-sm">
+                        Interaction Note
+                      </h3>
+                    </div>
+                    <p className="text-xs text-slate-500">
+                      Added by <span className="font-semibold text-slate-700">{activity.user?.name}</span> ({activity.user?.role})
+                    </p>
+                  </div>
+                </div>
 
-<h2 className="font-bold text-lg">
+                {/* Message Callout Box (Matches Note Design in Image) */}
+                <div className="my-3 p-4 rounded-xl bg-slate-50/80 border-l-4 border-amber-500 text-slate-700 text-sm italic leading-relaxed">
+                  "{activity.message}"
+                </div>
 
-{activity.user?.name}
+                {/* Lead Details Footer */}
+                {activity.lead && (
+                  <div className="mt-3 pt-3 border-t border-slate-100 flex items-center gap-4 text-xs text-slate-500">
+                    <div>
+                      Lead: <span className="font-bold text-slate-800">{activity.lead?.name}</span>
+                    </div>
+                    {activity.lead?.company && (
+                      <div>
+                        Company: <span className="font-bold text-slate-800">{activity.lead?.company}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
 
-</h2>
+              </div>
+            </div>
+          ))}
+      </div>
+    </div>
 
-
-<p className="text-sm text-gray-500">
-
-{activity.user?.role}
-
-</p>
-
-
+  </div>
 </div>
-
-
-
-<p className="text-sm text-gray-500">
-
-{
-new Date(activity.createdAt)
-.toLocaleString()
-}
-
-</p>
-
-
-</div>
-
-
-
-<hr className="my-3"/>
-
-
-
-<p className="font-semibold">
-
-Note:
-</p>
-
-
-<p>
-{activity.message}
-</p>
-
-
-
-
-<div className="mt-3 text-sm text-gray-600">
-
-
-Lead:
-
-<b>
- {activity.lead?.name}
-</b>
-
-
-<br/>
-
-
-Company:
-
-<b>
- {activity.lead?.company}
-</b>
-
-
-</div>
-
-
-
-</div>
-
-
-))
-
-}
-
-
-</div>
-
-
-</div>
-
 )
 
 }

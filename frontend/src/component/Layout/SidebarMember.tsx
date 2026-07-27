@@ -4,16 +4,13 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import {
   LayoutDashboard,
-  Users,
-  UserRound,
-  Activity,
-  Settings,
+  
   LogOut,
   Menu,
   X,
 } from "lucide-react";
 
-const Sidebar = () => {
+const SidebarMember = () => {
   const [open, setOpen] = useState(false);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -23,33 +20,16 @@ const Sidebar = () => {
         : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/60"
     }`;
 
-  const links = [
-    {
-      name: "Dashboard",
-      path: "/dashboard",
-      icon: <LayoutDashboard size={20} />,
-    },
-    {
-      name: "Leads",
-      path: "/leads",
-      icon: <Users size={20} />,
-    },
-    {
-      name: "Team",
-      path: "/team",
-      icon: <UserRound size={20} />,
-    },
-    {
-      name: "Activity",
-      path: "/activity",
-      icon: <Activity size={20} />,
-    },
-    {
-      name: "Settings",
-      path: "/settings",
-      icon: <Settings size={20} />,
-    },
-  ];
+
+  
+const links = [
+  {
+    name: "Dashboard",
+    path: "/member/dashboard",
+    icon: <LayoutDashboard size={20} />,
+  },
+
+];
 
   return (
     <>
@@ -134,17 +114,16 @@ const Sidebar = () => {
         {/* Logout */}
 
         <NavLink
-          to="/login"
-          className={navLinkClass}
-        >
-
-          <LogOut size={20}/>
-
-          <span>
-            Log Out
-          </span>
-
-        </NavLink>
+  to="/login"
+  onClick={() => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  }}
+  className={navLinkClass}
+>
+  <LogOut size={20} />
+  <span>Log Out</span>
+</NavLink>
 
 
       </aside>
@@ -152,4 +131,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default SidebarMember;

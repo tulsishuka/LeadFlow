@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar";
+import SidebarMember from "../../component/Layout/SidebarMember";
 
-const DashboardLayout = () => {
+const DashboardLayoutMember = () => {
   return (
     <div className="flex min-h-screen bg-[#f8f9ff]">
-     <Sidebar/>
+<SidebarMember/>
       <main className="flex-1 overflow-y-auto">
         <Outlet />
       </main>
@@ -12,4 +12,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default DashboardLayoutMember;

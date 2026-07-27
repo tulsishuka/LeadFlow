@@ -5,9 +5,6 @@ import axios from "axios";
 import Papa from "papaparse";
 
 import {
-  Filter,
-  Download,
-  Columns,
   MoreVertical,
   ChevronLeft,
   ChevronRight,
@@ -145,6 +142,7 @@ const Leads = () => {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const exportLeads = () => {
     const csv = Papa.unparse(leads);
 
@@ -205,350 +203,203 @@ const Leads = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 p-6">
-      <div className="max-w-7xl mx-auto">
 
-        {/* Header */}
-
-        <div className="flex flex-col md:flex-row justify-between items-center gap-5 mb-8">
-
-          <div>
-            <h1 className="text-3xl font-bold text-slate-900">
-              Leads
-            </h1>
-
-            <p className="text-sm text-slate-500 mt-2">
-              <span className="font-semibold">
-                {pagination.total}
-              </span>{" "}
-              Total Leads
-            </p>
-          </div>
-
-          <div className="flex gap-3">
-
-            <button
-              onClick={() => setShowFilter(!showFilter)}
-              className="border rounded-xl px-4 py-2 flex items-center gap-2 bg-white"
-            >
-              <Filter size={18} />
-              Filter
-            </button>
-
-            <button
-              onClick={exportLeads}
-              className="border rounded-xl px-4 py-2 flex items-center gap-2 bg-white"
-            >
-              <Download size={18} />
-              Export
-            </button>
-
-            <button
-              onClick={() =>
-                setColumns({
-                  email: !columns.email,
-                  company: !columns.company,
-                  assigned: !columns.assigned,
-                  created: !columns.created,
-                })
-              }
-              className="border rounded-xl px-4 py-2 flex items-center gap-2 bg-white"
-            >
-              <Columns size={18} />
-              Columns
-            </button>
-
-          </div>
-
-        </div>
-
-        {/* Search */}
-
-        <div className="mb-5">
-
-          <div className="bg-white border rounded-xl flex items-center px-4">
-
-            <Search size={18} />
-
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search leads..."
-              className="w-full p-3 outline-none"
-            />
-
-          </div>
-
-        </div>
-
-        {/* Filter */}
-
-        {showFilter && (
-          <div className="bg-white border rounded-xl p-4 mb-5">
-
-            <select
-              value={selectedStatus}
-              onChange={(e) =>
-                setSelectedStatus(e.target.value)
-              }
-              className="border rounded-lg p-2"
-            >
-              <option value="">All Status</option>
-              <option value="New">New</option>
-              <option value="Contacted">Contacted</option>
-              <option value="Qualified">Qualified</option>
-              <option value="Won">Won</option>
-              <option value="Lost">Lost</option>
-            </select>
-
-          </div>
-        )}
-
-<div className="bg-white rounded-2xl border shadow-sm overflow-hidden">
-
-  <div className="overflow-x-auto">
-
-    <table className="w-full">
-
-      <thead className="bg-slate-100">
-
-        <tr className="text-left">
-
-          <th className="px-6 py-4">Customer</th>
-
-          {columns.email && (
-            <th className="px-6 py-4">Email</th>
-          )}
-
-          {columns.company && (
-            <th className="px-6 py-4">Company</th>
-          )}
-
-          <th className="px-6 py-4">Status</th>
-
-          {columns.assigned && (
-            <th className="px-6 py-4">Assigned To</th>
-          )}
-
-          {columns.created && (
-            <th className="px-6 py-4">Created</th>
-          )}
-
-          <th className="px-6 py-4 text-right">
-            Action
-          </th>
-
-        </tr>
-
-      </thead>
-
-      <tbody className="divide-y">
-
-        {filteredLeads.length === 0 ? (
-
-          <tr>
-
-            <td
-              colSpan={7}
-              className="text-center py-12 text-slate-500"
-            >
-              No Leads Found
-            </td>
-
-          </tr>
-
-        ) : (
-
-          filteredLeads.map((lead) => (
-
-            <tr
-              key={lead._id}
-              className="hover:bg-slate-50"
-            >
-
-              {/* Customer */}
-
-              <td className="px-6 py-4">
-
-                <div className="flex items-center gap-3">
-
-                  <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center font-bold text-indigo-700">
-
-                    {lead.name.charAt(0).toUpperCase()}
-
-                  </div>
-
-                  <div>
-
-                    <h3 className="font-semibold">
-                      {lead.name}
-                    </h3>
-
-                    <p className="text-xs text-slate-500">
-                      {lead.phone}
-                    </p>
-
-                  </div>
-
-                </div>
-
-              </td>
-
-              {columns.email && (
-                <td className="px-6 py-4">
-                  {lead.email}
-                </td>
-              )}
-
-              {columns.company && (
-                <td className="px-6 py-4">
-                  {lead.company}
-                </td>
-              )}
-
-              <td className="px-6 py-4">
-
-                <span
-                  className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(
-                    lead.status
-                  )}`}
-                >
-                  {lead.status}
-                </span>
-
-              </td>
-
-              {columns.assigned && (
-                <td className="px-6 py-4">
-                  {lead.assignedTo
-                    ? lead.assignedTo.name
-                    : "Unassigned"}
-                </td>
-              )}
-
-              {columns.created && (
-                <td className="px-6 py-4">
-                  {new Date(
-                    lead.createdAt
-                  ).toLocaleDateString()}
-                </td>
-              )}
-
-              {/* Assign Dropdown */}
-
-              <td className="px-6 py-4 text-right relative">
-
-                <button
-                  onClick={() =>
-                    setSelectedLead(
-                      selectedLead === lead._id
-                        ? null
-                        : lead._id
-                    )
-                  }
-                  className="p-2 rounded-lg hover:bg-slate-100"
-                >
-                  <MoreVertical size={18} />
-                </button>
-
-                {selectedLead === lead._id && (
-
-                  <div className="absolute right-0 mt-2 w-56 bg-white border rounded-xl shadow-lg z-20 p-3">
-
-                    <p className="text-xs text-slate-500 mb-2">
-                      Assign Lead To
-                    </p>
-
-                    <select
-                      defaultValue=""
-                      onChange={(e) =>
-                        assignLead(
-                          lead._id,
-                          e.target.value
-                        )
-                      }
-                      className="w-full border rounded-lg p-2"
-                    >
-
-                      <option value="">
-                        Select Member
-                      </option>
-
-                      {members.map((member) => (
-
-                        <option
-                          key={member._id}
-                          value={member._id}
-                        >
-                          {member.name}
-                        </option>
-
-                      ))}
-
-                    </select>
-
-                  </div>
-
-                )}
-
-              </td>
-
-            </tr>
-
-          ))
-
-        )}
-
-      </tbody>
-
-    </table>
-
-  </div>
-
-  {/* Pagination */}
-
-  <div className="flex justify-between items-center border-t p-4">
-
-    <p className="text-sm text-slate-500">
-      Page {pagination.page} of {pagination.totalPages}
-    </p>
-
-    <div className="flex gap-2">
-
-      <button
-        disabled={pagination.page === 1}
-        onClick={() =>
-          fetchLeads(pagination.page - 1)
-        }
-        className="border rounded-lg px-4 py-2 disabled:opacity-50"
-      >
-        <ChevronLeft size={18} />
-      </button>
-
-      <button className="bg-indigo-600 text-white rounded-lg px-4 py-2">
-        {pagination.page}
-      </button>
-
-      <button
-        disabled={
-          pagination.page === pagination.totalPages
-        }
-        onClick={() =>
-          fetchLeads(pagination.page + 1)
-        }
-        className="border rounded-lg px-4 py-2 disabled:opacity-50"
-      >
-        <ChevronRight size={18} />
-      </button>
-
+<div className="min-h-screen bg-[#f8f9ff] p-6 font-sans">
+  <div className="max-w-7xl mx-auto space-y-6">
+
+    {/* Header */}
+    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+      <div>
+        <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Leads</h1>
+        <p className="text-xs text-slate-500 mt-1 font-medium">
+          <span className="font-bold text-slate-800">{pagination.total}</span> total leads in pipeline <span className="mx-1">•</span> <span className="text-emerald-600 font-semibold">12 active today</span>
+        </p>
+      </div>
+
+      
     </div>
 
-  </div>
-
-</div>
-
+    {/* Search Bar */}
+    <div className="mb-4">
+      <div className="bg-white border border-slate-200/80 rounded-xl flex items-center px-3.5 shadow-2xs focus-within:border-indigo-500 transition">
+        <Search size={16} className="text-slate-400" />
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search leads..."
+          className="w-full p-2.5 text-xs text-slate-700 outline-none bg-transparent placeholder:text-slate-400"
+        />
       </div>
     </div>
+
+    {/* Filter Dropdown */}
+    {showFilter && (
+      <div className="bg-white border border-slate-200 rounded-xl p-3 mb-4 shadow-sm">
+        <select
+          value={selectedStatus}
+          onChange={(e) => setSelectedStatus(e.target.value)}
+          className="border border-slate-200 rounded-lg p-2 text-xs font-medium text-slate-700 outline-none bg-white"
+        >
+          <option value="">All Status</option>
+          <option value="New">New</option>
+          <option value="Contacted">Contacted</option>
+          <option value="Qualified">Qualified</option>
+          <option value="Won">Won</option>
+          <option value="Lost">Lost</option>
+        </select>
+      </div>
+    )}
+
+    {/* Table Container */}
+    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-[#f8fafc] border-b border-slate-100 text-[11px] font-semibold text-slate-400 uppercase tracking-wider text-left">
+              <th className="px-6 py-3.5">Customer</th>
+              {columns.email && <th className="px-6 py-3.5">Email</th>}
+              {columns.company && <th className="px-6 py-3.5">Company</th>}
+              <th className="px-6 py-3.5">Status</th>
+              {columns.assigned && <th className="px-6 py-3.5">Assigned To</th>}
+              {columns.created && <th className="px-6 py-3.5">Created</th>}
+              <th className="px-6 py-3.5 text-right">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody className="divide-y divide-slate-100 text-xs text-slate-600">
+            {filteredLeads.length === 0 ? (
+              <tr>
+                <td colSpan={7} className="text-center py-12 text-slate-400 font-medium">
+                  No Leads Found
+                </td>
+              </tr>
+            ) : (
+              filteredLeads.map((lead) => (
+                <tr key={lead._id} className="hover:bg-slate-50/60 transition-colors">
+                  {/* Customer */}
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-slate-600 shrink-0">
+                        {lead.name.charAt(0).toUpperCase()}
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-slate-900 leading-snug">{lead.name}</h3>
+                        {/* <p className="text-[11px] text-slate-400">{lead.phone || lead.title || "Contact"}</p> */}
+                      </div>
+                    </div>
+                  </td>
+
+                  {columns.email && (
+                    <td className="px-6 py-4 text-slate-500 font-normal">{lead.email}</td>
+                  )}
+
+                  {columns.company && (
+                    <td className="px-6 py-4 font-semibold text-slate-800">{lead.company}</td>
+                  )}
+
+                  <td className="px-6 py-4">
+                    <span
+                      className={`inline-block px-2.5 py-1 rounded-md text-[11px] font-medium ${getStatusColor(
+                        lead.status
+                      )}`}
+                    >
+                      {lead.status}
+                    </span>
+                  </td>
+
+                  {columns.assigned && (
+                    <td className="px-6 py-4">
+                      {lead.assignedTo ? (
+                        <div className="flex items-center gap-2">
+                          <span className="w-6 h-6 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100 flex items-center justify-center text-[10px] font-bold">
+                            {lead.assignedTo.name.split(" ").map(n => n[0]).join("").toUpperCase()}
+                          </span>
+                          <span className="font-medium text-slate-700">{lead.assignedTo.name}</span>
+                        </div>
+                      ) : (
+                        <span className="text-slate-400 italic">Unassigned</span>
+                      )}
+                    </td>
+                  )}
+
+                  {columns.created && (
+                    <td className="px-6 py-4 text-slate-400 font-medium">
+                      {new Date(lead.createdAt).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric"
+                      })}
+                    </td>
+                  )}
+
+                  {/* Actions Dropdown */}
+                  <td className="px-6 py-4 text-right relative">
+                    <button
+                      onClick={() => setSelectedLead(selectedLead === lead._id ? null : lead._id)}
+                      className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition"
+                    >
+                      <MoreVertical size={16} />
+                    </button>
+
+                    {selectedLead === lead._id && (
+                      <div className="absolute right-6 mt-1 w-52 bg-white border border-slate-100 rounded-xl shadow-lg z-20 p-3 text-left">
+                        <p className="text-[11px] font-semibold text-slate-400 mb-2 uppercase">
+                          Assign Lead To
+                        </p>
+                        <select
+                          defaultValue=""
+                          onChange={(e) => assignLead(lead._id, e.target.value)}
+                          className="w-full border border-slate-200 rounded-lg p-2 text-xs text-slate-700 bg-white focus:outline-none"
+                        >
+                          <option value="">Select Member</option>
+                          {members.map((member) => (
+                            <option key={member._id} value={member._id}>
+                              {member.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Pagination Footer */}
+      <div className="flex justify-between items-center bg-[#f8fafc] border-t border-slate-100 px-6 py-3.5 text-xs text-slate-500">
+        <p className="font-medium">
+          Showing <span className="font-bold text-slate-700">{pagination.page * 10 - 9}-{Math.min(pagination.page * 10, pagination.total)}</span> of <span className="font-bold text-slate-700">{pagination.total}</span> leads
+        </p>
+
+        <div className="flex items-center gap-1.5">
+          <button
+            disabled={pagination.page === 1}
+            onClick={() => fetchLeads(pagination.page - 1)}
+            className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-200/60 disabled:opacity-30 disabled:hover:bg-transparent transition"
+          >
+            <ChevronLeft size={16} />
+          </button>
+
+          <button className="w-7 h-7 bg-indigo-600 text-white rounded-lg font-semibold flex items-center justify-center text-xs">
+            {pagination.page}
+          </button>
+
+          <button
+            disabled={pagination.page === pagination.totalPages}
+            onClick={() => fetchLeads(pagination.page + 1)}
+            className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-200/60 disabled:opacity-30 disabled:hover:bg-transparent transition"
+          >
+            <ChevronRight size={16} />
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
   );
 };
 
